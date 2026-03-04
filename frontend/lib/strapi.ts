@@ -1,4 +1,31 @@
+import qs from 'qs'
+
 const BASE_URL = 'http://localhost:1337'
+
+const QUERY_HOME_PAGE = {
+  populate: {
+    sections: {
+      on: {
+        "layout.hero-section": {
+          populate: {
+            image: {
+              fields: ["url", "alternativeText"]
+            },
+            link: {
+              populate: true
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+export async function getHomePage() {
+  const query = qs.stringify(QUERY_HOME_PAGE)
+  const response = await getStrapiData(`/api/home-page?${query}`)
+  return response?.data
+}
 
 export async function getStrapiData(url: string) {
   try {

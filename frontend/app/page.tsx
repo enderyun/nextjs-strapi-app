@@ -1,16 +1,17 @@
-import { getStrapiData } from "@/lib/strapi";
+import { getHomePage } from "@/lib/strapi";
+import { HeroSection } from "@/components/hero-section";  
 
 export default async function Home() {
-  const strapiData = await getStrapiData('/api/home-page')
+  const strapiData = await getHomePage()
 
-  console.log(strapiData)
+  const { title, description } = strapiData
 
-  const { title, description } = strapiData.data
+  const [heroSection] = strapiData?.sections || []
+  console.log(heroSection)
 
   return (
     <main className="flex flex-col items-center justify-center h-screen">
-      <h1 className="text-4xl font-bold">{title}</h1>
-      <p className="text-lg">{description}</p>
+      <HeroSection data={heroSection} />
     </main>
   );
 }
