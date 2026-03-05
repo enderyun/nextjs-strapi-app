@@ -7,7 +7,6 @@ export default async function Home() {
   const { title, description } = strapiData
 
   const [heroSection] = strapiData?.sections || []
-  console.log(heroSection)
 
   return (
     <main className="flex flex-col items-center justify-center h-screen">

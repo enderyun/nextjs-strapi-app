@@ -1,6 +1,6 @@
 import qs from 'qs'
 
-const BASE_URL = 'http://localhost:1337'
+export const STRAPI_BASE_URL = process.env.STRAPI_API_URL || 'http://localhost:1337'
 
 const QUERY_HOME_PAGE = {
   populate: {
@@ -29,7 +29,7 @@ export async function getHomePage() {
 
 export async function getStrapiData(url: string) {
   try {
-    const response = await fetch(`${BASE_URL}${url}`)
+    const response = await fetch(`${STRAPI_BASE_URL}${url}`)
 
     if (!response.ok) {
       throw new Error(`Error al obtener datos de Strapi: ${response.statusText}`)

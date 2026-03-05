@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { STRAPI_BASE_URL } from "@/lib/strapi";
 
 const styles = {
   header: "relative h-[600px] overflow-hidden",
@@ -19,6 +20,10 @@ export function HeroSection({ data }: { readonly data: {
 
   const { heading, subHeading, link } = data;
 
+  const imageURL = data.image?.url.startsWith('http')
+    ? data.image.url
+    : `${STRAPI_BASE_URL}${data.image.url}`
+
 
   return (
     <header className={styles.header}>
@@ -26,7 +31,7 @@ export function HeroSection({ data }: { readonly data: {
         alt="Background"
         className={styles.backgroundImage}
         height={1080}
-        src='https://blog.tubikstudio.com/wp-content/uploads/2021/07/665d6a7482884eb69ef92461_What-is-a-webpage-Definition-Meaning-1.png'
+        src={imageURL}
         style={{
           aspectRatio: "1920/1080",
           objectFit: "cover",
