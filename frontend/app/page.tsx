@@ -1,6 +1,15 @@
 import { getHomePage } from "@/lib/strapi";
 import { HeroSection } from "@/components/hero-section";  
 
+export async function generateMetadata() {
+  const strapiData = await getHomePage()
+  return { 
+    title: strapiData?.title,
+    description: strapiData?.description
+  }
+}
+
+
 export default async function Home() {
   const strapiData = await getHomePage()
 
