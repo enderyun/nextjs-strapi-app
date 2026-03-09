@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { actions } from "@/actions";
 
 import {
   CardTitle,
@@ -15,6 +16,7 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useActionState } from "react";
+import { type FormState } from "@/validations/auth";
 
 
 const styles = {
@@ -29,10 +31,26 @@ const styles = {
   link: "ml-2 text-pink-500",
 };
 
+const INITIAL_STATE: FormState = {
+  success: undefined,
+  message: undefined,
+  strapiErrors: null,
+  zodErrors: null,
+  data: {
+    username: "",
+    email: "",
+    password: ""
+  }
+}
+
 export function SignupForm() {
+  const [formState, formAction] = useActionState(actions.auth.registerUserAction, INITIAL_STATE)
+
+  console.log(formState)
+
   return (
     <div className={styles.container}>
-      <form>
+      <form action={formAction}>
         <Card>
           <CardHeader className={styles.header}>
             <CardTitle className={styles.title}>Sign Up</CardTitle>
