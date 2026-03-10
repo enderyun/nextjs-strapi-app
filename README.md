@@ -69,8 +69,8 @@ next-js-strapi-app/
 │   │   └── auth.ts                # registerUserAction (sign-up logic)
 │   ├── components/                # UI components
 │   │   ├── hero-section.tsx       # Hero section (renders Strapi dynamic zone data)
-│   │   ├── sing-up-form.tsx       # Sign-up form with useActionState
-│   │   ├── sing-in-form.tsx       # Sign-in form
+│   │   ├── sign-up-form.tsx       # Sign-up form with useActionState
+│   │   ├── sign-in-form.tsx       # Sign-in form
 │   │   ├── form-error.tsx         # Inline field error display
 │   │   └── ui/                    # shadcn/ui primitives (Button, Card, Input, Label...)
 │   ├── lib/
