@@ -17,6 +17,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useActionState } from "react";
 import { type FormState } from "@/validations/auth";
+import { FormError } from "./form-error";
 
 
 const styles = {
@@ -66,7 +67,9 @@ export function SignupForm() {
                 name="username"
                 type="text"
                 placeholder="username"
+                defaultValue={formState.data?.username ?? ''}
               />
+              <FormError error={formState.zodErrors?.username} />
             </div>
             <div className={styles.fieldGroup}>
               <Label htmlFor="email">Email</Label>
@@ -75,7 +78,9 @@ export function SignupForm() {
                 name="email"
                 type="email"
                 placeholder="name@example.com"
+                defaultValue={formState.data?.email ?? ''}
               />
+              <FormError error={formState.zodErrors?.email} />
             </div>
             <div className={styles.fieldGroup}>
               <Label htmlFor="password">Password</Label>
@@ -84,7 +89,9 @@ export function SignupForm() {
                 name="password"
                 type="password"
                 placeholder="password"
+                defaultValue={formState.data?.password ?? ''}
               />
+              <FormError error={formState.zodErrors?.password} />
             </div>
           </CardContent>
           <CardFooter className={styles.footer}>
