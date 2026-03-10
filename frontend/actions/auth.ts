@@ -2,6 +2,7 @@
 
 import { z } from "zod"
 import { type FormState, SignupFormSchema } from "@/validations/auth"
+import { registerUserService } from "@/lib/strapi"
 
 export async function registerUserAction(prevState: FormState, formData: FormData): Promise<FormState> {
 
@@ -33,7 +34,21 @@ export async function registerUserAction(prevState: FormState, formData: FormDat
   }
 
   console.log("Validation success")
-  console.log('fields: ', fields)
+  console.log('fields: ', validatedFields.data)
+
+  const response = await registerUserService(validatedFields.data)
+
+  if (!response || response.error) {
+    return {
+      success: false,
+      message: 'Registration Error!',
+      strapiErrors: response?.error,
+      zodErrors: null,
+      data: fields
+    }
+  }
+
+  console.log("Registration success")
 
   return {
     success: true,
